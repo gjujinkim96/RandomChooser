@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Random Chooser</string>
+    <string name="element_title">Your Elements</string>
+    <string name="choose_random">Choose Random</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
