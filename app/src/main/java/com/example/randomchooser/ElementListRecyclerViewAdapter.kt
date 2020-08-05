@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ElementListRecyclerViewAdapter(val context: Context, var data: MutableList<Element>) : RecyclerView.Adapter<ElementListRecyclerViewAdapter.ViewHolder>() {
-    class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        var name: TextView = view.findViewById(R.id.element_name)
+class ElementListRecyclerViewAdapter(private val context: Context, private var data: MutableList<Element>) : RecyclerView.Adapter<ElementListRecyclerViewAdapter.ViewHolder>() {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.element_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
