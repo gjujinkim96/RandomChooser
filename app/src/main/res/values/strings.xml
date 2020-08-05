@@ -9,4 +9,7 @@
     <string name="cancel_button">cancel</string>
     <string name="add_element_name_label">Name:</string>
     <string name="add_element_title">Add New Element</string>
+    <string name="x">X</string>
+    <string name="modify_element_title">Modify Element</string>
+    <string name="modify_button">modify</string>
 </resources>

@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
                 val dialog = AddElementDialogFragment()
                 dialog.show(supportFragmentManager, "AddElementDialogFragment")
             }
-            R.id.element_list_edit_button -> Toast.makeText(this, "edit button", Toast.LENGTH_SHORT).show()
+            R.id.element_list_edit_button -> recyclerViewAdapter.toggleEditMode()
             R.id.element_list_choose_random -> Toast.makeText(this, "choose random button", Toast.LENGTH_SHORT).show()
         }
     }
@@ -63,5 +63,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
 
     override fun onDialogNegative() {
         Toast.makeText(this, "add element cancel", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDialogModify(element: Element, position: Int) {
+        recyclerViewAdapter.modifyElement(element, position)
     }
 }
