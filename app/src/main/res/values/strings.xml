@@ -6,4 +6,7 @@
     <string name="plus">+</string>
     <string name="edit_button">edit</string>
     <string name="add_button">add</string>
+    <string name="cancel_button">cancel</string>
+    <string name="add_element_name_label">Name:</string>
+    <string name="add_element_title">Add New Element</string>
 </resources>

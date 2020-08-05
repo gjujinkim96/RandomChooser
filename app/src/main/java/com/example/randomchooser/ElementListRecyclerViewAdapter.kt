@@ -23,4 +23,9 @@ class ElementListRecyclerViewAdapter(private val context: Context, private var d
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = data[position].name
     }
+
+    fun addElement(element: Element) {
+        data.add(element)
+        notifyItemInserted(data.size)
+    }
 }

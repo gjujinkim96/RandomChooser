@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_element_list.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialogFragment.AddElementDialogListener {
     private var randomCount = 1
     private lateinit var recyclerViewAdapter: ElementListRecyclerViewAdapter
 
@@ -48,9 +48,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 element_list_random_count.text = randomCount.toString()
             }
-            R.id.element_list_add_button -> Toast.makeText(this, "add button", Toast.LENGTH_SHORT).show()
+            R.id.element_list_add_button -> {
+                val dialog = AddElementDialogFragment()
+                dialog.show(supportFragmentManager, "AddElementDialogFragment")
+            }
             R.id.element_list_edit_button -> Toast.makeText(this, "edit button", Toast.LENGTH_SHORT).show()
             R.id.element_list_choose_random -> Toast.makeText(this, "choose random button", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDialogPositive(element: Element) {
+        recyclerViewAdapter.addElement(element)
+    }
+
+    override fun onDialogNegative() {
+        Toast.makeText(this, "add element cancel", Toast.LENGTH_SHORT).show()
     }
 }
