@@ -4,4 +4,6 @@
     <string name="choose_random">Choose Random</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
+    <string name="edit_button">edit</string>
+    <string name="add_button">add</string>
 </resources>
