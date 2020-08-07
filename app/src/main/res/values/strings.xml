@@ -16,5 +16,4 @@
     <string name="result_text">Result</string>
     <string name="send_elements_list">SEND_ELEMENTS_LIST</string>
     <string name="send_random_count">SEND_RANDOM_COUNT</string>
-    <string name="intent_bundle">INTENT_BUNDLE</string>
 </resources>

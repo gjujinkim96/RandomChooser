@@ -56,11 +56,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
             }
             R.id.element_list_edit_button -> recyclerViewAdapter.toggleEditMode()
             R.id.element_list_choose_random -> {
-                val intent = Intent(this, ResultActivity::class.java)
-                val args = Bundle()
-                args.putSerializable(getString(R.string.send_elements_list), ArrayList(recyclerViewAdapter.data) as Serializable)
-                intent.putExtra(getString(R.string.intent_bundle), args)
-                intent.putExtra(getString(R.string.send_random_count), randomCount)
+                val intent = Intent(this, ResultActivity::class.java).apply {
+                    putExtra(getString(R.string.send_elements_list), ArrayList(recyclerViewAdapter.data) as Serializable)
+                    putExtra(getString(R.string.send_random_count), randomCount)
+                }
+
                 startActivity(intent)
             }
         }

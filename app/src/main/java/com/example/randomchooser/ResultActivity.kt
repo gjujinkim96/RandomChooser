@@ -18,8 +18,7 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        val args = intent.getBundleExtra(getString(R.string.intent_bundle)) ?: throw IllegalArgumentException("Need bundle data in this activity")
-        val arrayData = args.getSerializable(getString(R.string.send_elements_list)) as ArrayList<*>
+        val arrayData = intent.getSerializableExtra(getString(R.string.send_elements_list)) as ArrayList<*>
         elements = arrayData.filterIsInstance<Element>().toMutableList()
         chooseCount = intent.getIntExtra(getString(R.string.send_random_count), 0)
 
