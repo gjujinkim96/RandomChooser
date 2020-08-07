@@ -1,3 +1,5 @@
 package com.example.randomchooser
 
-data class Element(val name: String)
+import java.io.Serializable
+
+data class Element(val name: String) : Serializable

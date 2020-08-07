@@ -10,7 +10,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class ElementListRecyclerViewAdapter(private val context: Context, private var data: MutableList<Element>) : RecyclerView.Adapter<ElementListRecyclerViewAdapter.ViewHolder>() {
+class ElementListRecyclerViewAdapter(private val context: Context, data: MutableList<Element>, private val listener: DataSizeChanged? = null) : RecyclerView.Adapter<ElementListRecyclerViewAdapter.ViewHolder>() {
+    var data: MutableList<Element> = data
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+            listener?.onDataSizeChanged(data.size)
+        }
+
     var isEditMode = false
 
     open class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -46,6 +53,7 @@ class ElementListRecyclerViewAdapter(private val context: Context, private var d
             editHolder.xButton.setOnClickListener {
                 data.removeAt(holder.adapterPosition)
                 notifyItemRemoved(holder.adapterPosition)
+                listener?.onDataSizeChanged(data.size)
             }
         }
     }
@@ -60,10 +68,15 @@ class ElementListRecyclerViewAdapter(private val context: Context, private var d
     fun addElement(element: Element) {
         data.add(element)
         notifyItemInserted(data.size)
+        listener?.onDataSizeChanged(data.size)
     }
 
     fun modifyElement(element: Element, position: Int) {
         data[position] = element
         notifyItemChanged(position)
+    }
+
+    interface DataSizeChanged {
+        fun onDataSizeChanged(newSize: Int)
     }
 }

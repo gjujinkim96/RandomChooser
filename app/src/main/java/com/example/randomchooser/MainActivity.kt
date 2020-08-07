@@ -1,5 +1,6 @@
 package com.example.randomchooser
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,8 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_element_list.*
+import java.io.Serializable
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialogFragment.AddElementDialogListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialogFragment.AddElementDialogListener, ElementListRecyclerViewAdapter.DataSizeChanged {
     private var randomCount = 1
     private lateinit var recyclerViewAdapter: ElementListRecyclerViewAdapter
 
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
         setContentView(R.layout.activity_element_list)
 
         val data = mutableListOf<Element>(Element("hello"), Element("bye"))
-        recyclerViewAdapter = ElementListRecyclerViewAdapter(this, data)
+        recyclerViewAdapter = ElementListRecyclerViewAdapter(this, data, this)
 
         element_list_recylerview.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -53,7 +55,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
                 dialog.show(supportFragmentManager, "AddElementDialogFragment")
             }
             R.id.element_list_edit_button -> recyclerViewAdapter.toggleEditMode()
-            R.id.element_list_choose_random -> Toast.makeText(this, "choose random button", Toast.LENGTH_SHORT).show()
+            R.id.element_list_choose_random -> {
+                val intent = Intent(this, ResultActivity::class.java)
+                val args = Bundle()
+                args.putSerializable(getString(R.string.send_elements_list), ArrayList(recyclerViewAdapter.data) as Serializable)
+                intent.putExtra(getString(R.string.intent_bundle), args)
+                intent.putExtra(getString(R.string.send_random_count), randomCount)
+                startActivity(intent)
+            }
         }
     }
 
@@ -67,5 +76,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AddElementDialog
 
     override fun onDialogModify(element: Element, position: Int) {
         recyclerViewAdapter.modifyElement(element, position)
+    }
+
+    override fun onDataSizeChanged(newSize: Int) {
+        if (randomCount > newSize)
+            randomCount = newSize
     }
 }
